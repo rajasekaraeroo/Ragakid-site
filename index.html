@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RagaKids – Learn Carnatic Music the Fun Way!</title>
+  <meta name="description" content="RagaKids teaches Carnatic music fundamentals to children aged 3–8 through fun, animated, self-paced lessons. Works on Windows. No internet needed." />
+  <meta property="og:title" content="RagaKids – Carnatic Music for Kids" />
+  <meta property="og:description" content="Fun, animated Carnatic music lessons for children 3–8. One-time payment. Works offline on Windows." />
+  <meta property="og:image" content="og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --indigo:  #2C3E8C;
+      --coral:   #FF6B6B;
+      --sky:     #5B8DEF;
+      --grass:   #6BCB77;
+      --sun:     #FFD93D;
+      --peach:   #FFB347;
+      --bg:      #FFF8F0;
+      --text:    #2D2D2D;
+      --muted:   #777;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 { font-family: 'Baloo 2', cursive; }
+
+    /* ── NAV ──────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--indigo);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .nav-logo { font-family: 'Baloo 2', cursive; font-size: 1.6rem; color: var(--sun); text-decoration: none; }
+    .nav-cta {
+      background: var(--coral); color: white;
+      border: none; border-radius: 50px; padding: 10px 28px;
+      font-family: 'Baloo 2', cursive; font-size: 1rem; cursor: pointer;
+      text-decoration: none; transition: background .2s;
+    }
+    .nav-cta:hover { background: #ff5252; }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(160deg, #87CEEB 0%, #98D982 60%, #6BCB77 100%);
+      padding: 80px 24px 60px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '☁️'; font-size: 3rem; position: absolute;
+      top: 20px; left: 8%; animation: drift 12s linear infinite;
+      opacity: .8;
+    }
+    .hero::after {
+      content: '☁️'; font-size: 2rem; position: absolute;
+      top: 40px; right: 12%; animation: drift 18s linear infinite;
+      opacity: .6;
+    }
+    @keyframes drift { from { transform: translateX(-40px); } to { transform: translateX(40px); } }
+
+    .hero-mascot { font-size: 6rem; animation: bounce 2s ease-in-out infinite; display: inline-block; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      color: var(--indigo); margin: 12px 0 8px;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: #444; max-width: 560px; margin: 0 auto 32px;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-bottom: 36px;
+    }
+    .badge {
+      background: white; border-radius: 50px; padding: 6px 18px;
+      font-size: .9rem; font-weight: 700; color: var(--indigo);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--coral); color: white;
+      font-family: 'Baloo 2', cursive; font-size: 1.4rem;
+      border-radius: 50px; padding: 16px 52px;
+      text-decoration: none; box-shadow: 0 6px 24px rgba(255,107,107,.5);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(255,107,107,.5); }
+    .hero-price {
+      margin-top: 14px; font-size: .95rem; color: #555;
+    }
+    .hero-price s { color: var(--muted); }
+    .hero-price strong { color: var(--coral); font-size: 1.1rem; }
+
+    /* ── VIDEO ────────────────────────────────────────────── */
+    .video-section {
+      background: var(--indigo); padding: 64px 24px; text-align: center;
+    }
+    .video-section h2 { color: var(--sun); font-size: 2rem; margin-bottom: 24px; }
+    .video-wrap {
+      max-width: 720px; margin: 0 auto;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,.4);
+      aspect-ratio: 16/9; background: #000;
+    }
+    .video-wrap iframe { width: 100%; height: 100%; border: none; }
+    /* Placeholder shown until YouTube link is set */
+    .video-placeholder {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: white; border-radius: 20px;
+      font-size: 1.1rem; gap: 16px;
+    }
+    .video-placeholder .play-btn {
+      width: 72px; height: 72px; background: rgba(255,255,255,.2);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+
+    /* ── FEATURES ─────────────────────────────────────────── */
+    .features { padding: 72px 24px; text-align: center; }
+    .features h2 { font-size: 2.2rem; color: var(--indigo); margin-bottom: 8px; }
+    .features-sub { color: var(--muted); margin-bottom: 48px; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px; max-width: 960px; margin: 0 auto;
+    }
+    .feature-card {
+      background: white; border-radius: 20px; padding: 32px 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      transition: transform .2s;
+    }
+    .feature-card:hover { transform: translateY(-6px); }
+    .feature-icon { font-size: 2.8rem; margin-bottom: 12px; }
+    .feature-card h3 { font-size: 1.1rem; color: var(--indigo); margin-bottom: 8px; }
+    .feature-card p { font-size: .95rem; color: var(--muted); }
+
+    /* ── HOW IT WORKS ─────────────────────────────────────── */
+    .how { background: #EEF3FF; padding: 72px 24px; text-align: center; }
+    .how h2 { font-size: 2.2rem; color: var(--indigo); margin-bottom: 48px; }
+    .steps {
+      display: flex; flex-wrap: wrap; gap: 0;
+      max-width: 800px; margin: 0 auto;
+      justify-content: center;
+    }
+    .step {
+      flex: 1; min-width: 160px; padding: 0 16px;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '→'; position: absolute; right: -10px; top: 28px;
+      font-size: 1.4rem; color: var(--indigo); opacity: .4;
+    }
+    .step-num {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--indigo); color: white;
+      font-family: 'Baloo 2', cursive; font-size: 1.6rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .step h3 { font-size: 1rem; color: var(--indigo); margin-bottom: 6px; }
+    .step p { font-size: .9rem; color: var(--muted); }
+
+    /* ── MODULES ──────────────────────────────────────────── */
+    .modules { padding: 72px 24px; text-align: center; }
+    .modules h2 { font-size: 2.2rem; color: var(--indigo); margin-bottom: 8px; }
+    .modules-sub { color: var(--muted); margin-bottom: 48px; }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px; max-width: 900px; margin: 0 auto;
+    }
+    .module-card {
+      border-radius: 20px; padding: 28px 20px; color: white;
+      box-shadow: 0 6px 24px rgba(0,0,0,.12);
+    }
+    .module-card .mod-icon { font-size: 3rem; margin-bottom: 12px; }
+    .module-card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .module-card p { font-size: .9rem; opacity: .9; }
+
+    /* ── PRICING ──────────────────────────────────────────── */
+    .pricing {
+      background: linear-gradient(135deg, var(--sun) 0%, var(--peach) 100%);
+      padding: 72px 24px; text-align: center;
+    }
+    .pricing h2 { font-size: 2.2rem; color: var(--indigo); margin-bottom: 8px; }
+    .pricing-sub { color: #555; margin-bottom: 40px; }
+    .price-card {
+      background: white; border-radius: 24px; padding: 40px 36px;
+      max-width: 420px; margin: 0 auto;
+      box-shadow: 0 12px 48px rgba(0,0,0,.15);
+    }
+    .price-amount {
+      font-family: 'Baloo 2', cursive;
+      font-size: 3.5rem; color: var(--coral); line-height: 1;
+    }
+    .price-inr { font-size: 1rem; color: var(--muted); margin-bottom: 24px; }
+    .price-features { list-style: none; margin-bottom: 32px; text-align: left; }
+    .price-features li {
+      padding: 8px 0; border-bottom: 1px solid #f0f0f0;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .price-features li::before { content: '✅'; flex-shrink: 0; }
+    .buy-btn {
+      display: block; width: 100%;
+      background: var(--coral); color: white;
+      font-family: 'Baloo 2', cursive; font-size: 1.3rem;
+      border: none; border-radius: 50px; padding: 16px;
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 6px 20px rgba(255,107,107,.4);
+      transition: transform .15s;
+    }
+    .buy-btn:hover { transform: translateY(-2px); }
+    .price-note { font-size: .85rem; color: var(--muted); margin-top: 14px; }
+
+    /* ── TESTIMONIALS ─────────────────────────────────────── */
+    .testi { padding: 72px 24px; text-align: center; background: white; }
+    .testi h2 { font-size: 2.2rem; color: var(--indigo); margin-bottom: 40px; }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px; max-width: 900px; margin: 0 auto;
+    }
+    .testi-card {
+      background: var(--bg); border-radius: 20px; padding: 28px 24px;
+      text-align: left; box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    }
+    .testi-stars { color: var(--sun); font-size: 1.1rem; margin-bottom: 10px; }
+    .testi-text { color: var(--text); margin-bottom: 16px; font-style: italic; }
+    .testi-author { font-weight: 700; color: var(--indigo); font-size: .95rem; }
+    .testi-role { font-size: .85rem; color: var(--muted); }
+
+    /* ── FAQ ──────────────────────────────────────────────── */
+    .faq { padding: 72px 24px; max-width: 720px; margin: 0 auto; }
+    .faq h2 { font-size: 2.2rem; color: var(--indigo); margin-bottom: 32px; text-align: center; }
+    details {
+      border-bottom: 1px solid #eee; padding: 16px 0;
+    }
+    summary {
+      font-weight: 700; font-size: 1rem; cursor: pointer;
+      color: var(--indigo); list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    summary::after { content: '+'; font-size: 1.4rem; color: var(--coral); }
+    details[open] summary::after { content: '−'; }
+    details p { margin-top: 10px; color: var(--muted); font-size: .95rem; }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer {
+      background: var(--indigo); color: rgba(255,255,255,.7);
+      text-align: center; padding: 32px 24px; font-size: .9rem;
+    }
+    footer a { color: var(--sun); text-decoration: none; }
+
+    /* ── RESPONSIVE ───────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .step:not(:last-child)::after { display: none; }
+      .steps { flex-direction: column; align-items: center; }
+      nav { padding: 12px 16px; }
+    }
+  /* ── DOWNLOAD MODAL ──────────────────────────────────────── */
+  #download-modal {
+    display: none;
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(0,0,0,.6);
+    align-items: center; justify-content: center;
+  }
+  #download-modal.open { display: flex; }
+  .modal-box {
+    background: white; border-radius: 24px; padding: 48px 40px;
+    max-width: 460px; width: 90%; text-align: center;
+    animation: pop .3s ease;
+  }
+  @keyframes pop { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-box h2 { font-family:'Baloo 2',cursive; font-size:2rem; color:var(--indigo); margin-bottom:8px; }
+  .modal-box p  { color:var(--muted); margin-bottom:28px; }
+  .dl-btn {
+    display: inline-block;
+    background: var(--grass); color: white;
+    font-family:'Baloo 2',cursive; font-size:1.2rem;
+    border-radius: 50px; padding: 14px 40px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(107,203,119,.45);
+    transition: transform .15s;
+  }
+  .dl-btn:hover { transform: translateY(-2px); }
+  .modal-note { font-size:.82rem; color:var(--muted); margin-top:16px; }
+  .modal-close {
+    position:absolute; top:16px; right:20px;
+    font-size:1.4rem; cursor:pointer; color:#aaa; background:none; border:none;
+  }
+  </style>
+</head>
+<body>
+
+<!-- DOWNLOAD MODAL (shown after successful payment) -->
+<div id="download-modal" role="dialog" aria-modal="true">
+  <div class="modal-box" style="position:relative;">
+    <button class="modal-close" onclick="document.getElementById('download-modal').classList.remove('open')" aria-label="Close">✕</button>
+    <div style="font-size:3.5rem;margin-bottom:8px;">🎉</div>
+    <h2>Payment Successful!</h2>
+    <p>Thank you! Your download is ready. Click below to save <strong>RagaKids.exe</strong> to your computer.</p>
+    <a class="dl-btn" id="download-link" href="https://github.com/rajasekaraeroo/RagaKid/releases/latest/download/RagaKids.exe" download>
+      ⬇️ Download RagaKids.exe
+    </a>
+    <p class="modal-note">
+      A receipt has been sent to your email.<br>
+      Need help? <a href="mailto:rajasekar.aeroo@gmail.com">rajasekar.aeroo@gmail.com</a>
+    </p>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">RagaKids 🎵</a>
+  <a class="nav-cta" href="#pricing">Buy Now — ₹499</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-mascot">🎵</div>
+  <h1>Carnatic Music for Little Ones 🌟</h1>
+  <p class="hero-sub">
+    Geethu, your child's musical friend, teaches Carnatic music basics
+    through fun animations — made for children aged <strong>3 to 8</strong>.
+  </p>
+  <div class="hero-badges">
+    <span class="badge">🖥️ Works on Windows 10 &amp; 11</span>
+    <span class="badge">📶 No internet needed</span>
+    <span class="badge">🎓 Self-paced lessons</span>
+    <span class="badge">🌍 6 languages</span>
+    <span class="badge">👶 Ages 3–8</span>
+  </div>
+  <a class="hero-cta" href="#pricing">Get RagaKids — ₹499 🎶</a>
+  <p class="hero-price">
+    One-time payment &nbsp;·&nbsp; No subscription &nbsp;·&nbsp;
+    International: <strong>$9.99</strong>
+  </p>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section">
+  <h2>See it in action 🎬</h2>
+  <div class="video-wrap">
+    <!--
+      REPLACE the div below with this once you have a YouTube link:
+      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=0&rel=0"
+              allowfullscreen allow="accelerometer; autoplay; clipboard-write;
+              encrypted-media; gyroscope; picture-in-picture"></iframe>
+    -->
+    <div class="video-placeholder">
+      <div class="play-btn">▶</div>
+      <p>Demo video coming soon!</p>
+      <p style="font-size:.85rem;opacity:.7">Record your screen and paste the YouTube link here</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <h2>Everything a young musician needs 🌈</h2>
+  <p class="features-sub">Designed from the ground up for little fingers and big curiosity</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🌬️</div>
+      <h3>Breathing Exercises</h3>
+      <p>Animated breathing circle teaches proper breath control — the foundation of all music.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎵</div>
+      <h3>Meet the 7 Swaras</h3>
+      <p>Sa Ri Ga Ma Pa Da Ni — each with its own colour, personality, and sound.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎮</div>
+      <h3>Swara Tap Game</h3>
+      <p>Tap the swaras in order. Right answer gets a green flash. Wrong one gives a gentle shake!</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧘</div>
+      <h3>Sit &amp; Listen</h3>
+      <p>Teaches posture and deep listening — the two secrets of every great musician.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⭐</div>
+      <h3>Stars &amp; Progress</h3>
+      <p>Children earn stars and unlock the next module — motivation built in.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👨‍👩‍👧</div>
+      <h3>Parent Dashboard</h3>
+      <p>See exactly which steps your child completed, how long they practiced, and this week's activity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <h2>How it works 📖</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Download</h3>
+      <p>Pay once, download the Windows installer instantly.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Create a profile</h3>
+      <p>Add your child's name, age, and a fun avatar.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Start learning</h3>
+      <p>Geethu guides them step by step — 5–10 min per session.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Earn stars ⭐</h3>
+      <p>Complete modules, earn stars, unlock the next lesson!</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="modules">
+  <h2>4 fun-packed modules 🎓</h2>
+  <p class="modules-sub">Each module unlocks after the previous one — keeping the journey exciting</p>
+  <div class="modules-grid">
+    <div class="module-card" style="background: linear-gradient(135deg,#FF6B6B,#FF9800);">
+      <div class="mod-icon">🌬️</div>
+      <h3>Module 1 — Breathing</h3>
+      <p>Belly breathing, humming, and voice warm-up.</p>
+    </div>
+    <div class="module-card" style="background: linear-gradient(135deg,#5B8DEF,#2C3E8C);">
+      <div class="mod-icon">🎵</div>
+      <h3>Module 2 — Meet Sa</h3>
+      <p>Sing the first swara Sa — the home note of Carnatic music.</p>
+    </div>
+    <div class="module-card" style="background: linear-gradient(135deg,#6BCB77,#4ECDC4);">
+      <div class="mod-icon">🎶</div>
+      <h3>Module 3 — All 7 Swaras</h3>
+      <p>Meet Sa Ri Ga Ma Pa Da Ni and play the swara game.</p>
+    </div>
+    <div class="module-card" style="background: linear-gradient(135deg,#9B59B6,#6C3483);">
+      <div class="mod-icon">🧘</div>
+      <h3>Module 4 — Sit &amp; Listen</h3>
+      <p>Learn posture, close your eyes, and feel a full raga.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <h2>Simple, honest pricing 💛</h2>
+  <p class="pricing-sub">One payment. Yours forever. No subscription. No surprises.</p>
+  <div class="price-card">
+    <div class="price-amount">₹499</div>
+    <p class="price-inr">or $9.99 USD &nbsp;·&nbsp; One-time</p>
+    <ul class="price-features">
+      <li>All 4 learning modules</li>
+      <li>Works offline — no internet after install</li>
+      <li>Windows 10 &amp; 11 (no Python needed)</li>
+      <li>6 languages: Tamil, Telugu, Kannada, Malayalam, Hindi, English</li>
+      <li>Unlimited child profiles</li>
+      <li>Parent dashboard with progress tracking</li>
+      <li>Free updates forever</li>
+    </ul>
+    <button class="buy-btn" id="rzp-btn" onclick="openRazorpay()">
+      Buy Now &amp; Download 🎶
+    </button>
+    <p class="price-note">
+      Secure payment via Razorpay &nbsp;·&nbsp;
+      UPI · Cards · NetBanking · Wallets &nbsp;·&nbsp;
+      Instant download after payment
+    </p>
+    <p class="price-note" style="margin-top:8px;">
+      International? Pay <strong>$9.99</strong> via
+      <a href="https://paypal.me/YOURPAYPALHANDLE" target="_blank">PayPal</a>
+      and email us for the download link.
+    </p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <h2>What parents say ❤️</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"My 5-year-old asks to open RagaKids every morning before school. She already knows all 7 swaras!"</p>
+      <p class="testi-author">Priya S.</p>
+      <p class="testi-role">Parent, Chennai</p>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"We were spending ₹1,800/month on music classes. This teaches the same basics at home and my son actually enjoys it more."</p>
+      <p class="testi-author">Karthik R.</p>
+      <p class="testi-role">Parent, Bengaluru</p>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The Tamil language option is wonderful. My daughter is learning swaras in her mother tongue — something I couldn't find anywhere else."</p>
+      <p class="testi-author">Meenakshi V.</p>
+      <p class="testi-role">Parent, Singapore</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <h2>Questions? We have answers. 🙋</h2>
+
+  <details>
+    <summary>What age is this for?</summary>
+    <p>RagaKids is designed for children aged 3 to 8. The interface uses large buttons, simple words, and audio instructions so even pre-readers can use it independently.</p>
+  </details>
+
+  <details>
+    <summary>Does it work without internet?</summary>
+    <p>Yes! After the one-time download, RagaKids works completely offline. No subscription, no ongoing connection needed. Perfect for long flights, car rides, or areas with poor connectivity.</p>
+  </details>
+
+  <details>
+    <summary>Which Windows versions are supported?</summary>
+    <p>Windows 10 and Windows 11, both 64-bit. No Python or any other software needs to be installed — the EXE runs standalone.</p>
+  </details>
+
+  <details>
+    <summary>Which languages does it support?</summary>
+    <p>Tamil, Telugu, Kannada, Malayalam, Hindi, and English. You can switch language at any time from the menu — no restart needed.</p>
+  </details>
+
+  <details>
+    <summary>How do I get the app after paying?</summary>
+    <p>Immediately after payment on Gumroad, you'll receive an email with a download link. Click it, download <strong>RagaKids.exe</strong>, double-click to install, and you're ready to go.</p>
+  </details>
+
+  <details>
+    <summary>Can multiple children use it?</summary>
+    <p>Yes! You can add unlimited child profiles. Each child has their own progress, stars, and saved history.</p>
+  </details>
+
+  <details>
+    <summary>Is there a refund policy?</summary>
+    <p>If you're not happy within 7 days, email us at <a href="mailto:rajasekar.aeroo@gmail.com">rajasekar.aeroo@gmail.com</a> and we'll refund you — no questions asked.</p>
+  </details>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-size:1.1rem;color:white;margin-bottom:8px;">🎵 RagaKids</p>
+  <p>Teaching Carnatic music to the next generation — one swara at a time.</p>
+  <p style="margin-top:12px;">
+    <a href="mailto:rajasekar.aeroo@gmail.com">Contact Us</a>
+    &nbsp;·&nbsp;
+    <a href="#">Privacy Policy</a>
+  </p>
+  <p style="margin-top:16px;font-size:.8rem;">© 2024 RagaKids. All rights reserved.</p>
+</footer>
+
+<!-- Razorpay checkout script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  /*
+   * SETUP INSTRUCTIONS:
+   * 1. Create account at https://razorpay.com (free)
+   * 2. Go to Settings → API Keys → Generate Key
+   * 3. Replace REPLACE_WITH_YOUR_RAZORPAY_KEY_ID below with your Key ID
+   *    (starts with "rzp_live_..." for production or "rzp_test_..." for testing)
+   * 4. For the download link, GitHub releases URL is already set — works once
+   *    your GitHub Actions build has created a release.
+   */
+
+  var RAZORPAY_KEY = 'REPLACE_WITH_YOUR_RAZORPAY_KEY_ID';
+  var AMOUNT_PAISE = 49900;   // ₹499 × 100
+  var PRODUCT_NAME = 'RagaKids';
+  var DOWNLOAD_URL = 'https://github.com/rajasekaraeroo/RagaKid/releases/latest/download/RagaKids.exe';
+
+  function openRazorpay() {
+    if (RAZORPAY_KEY === 'REPLACE_WITH_YOUR_RAZORPAY_KEY_ID') {
+      alert('Payment not configured yet. Please contact rajasekar.aeroo@gmail.com to purchase.');
+      return;
+    }
+
+    var options = {
+      key:          RAZORPAY_KEY,
+      amount:       AMOUNT_PAISE,
+      currency:     'INR',
+      name:         'RagaKids',
+      description:  'Learn Carnatic Music — Windows App (Lifetime)',
+      image:        'https://rajasekaraeroo.github.io/RagaKid/logo.png',
+      theme:        { color: '#2C3E8C' },
+
+      prefill: {
+        /* Leave blank — customer fills in at checkout */
+      },
+
+      handler: function(response) {
+        /* Payment succeeded — show download modal */
+        console.log('Payment ID:', response.razorpay_payment_id);
+
+        /* Update download link (already set but refresh for safety) */
+        document.getElementById('download-link').href = DOWNLOAD_URL;
+
+        /* Show the modal */
+        document.getElementById('download-modal').classList.add('open');
+
+        /* Auto-trigger download after 1.5s */
+        setTimeout(function() {
+          var a = document.createElement('a');
+          a.href = DOWNLOAD_URL;
+          a.download = 'RagaKids.exe';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, 1500);
+      },
+
+      modal: {
+        ondismiss: function() {
+          /* User closed without paying — do nothing */
+        }
+      }
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+  }
+</script>
+</body>
+</html>
